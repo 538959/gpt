@@ -123,7 +123,7 @@ $("#send-btn").click(function () {
     $("#textarea").val("");
     $(".content").scrollTop($(".content")[0].scrollHeight);
     if (text.startsWith('new:')) send_time_str = get_time_str(send_time)
-    let chat_item = $('<div class="item item-left"><div class="avatar"><img src="./static/chatgpt.png" /></div><div class="bubble bubble-left markdown">正在等待回复</div></div>')
+    let chat_item = $('<div class="item item-left"><div class="avatar"><img src="./static/chatgpt.png" /></div><div class="bubble bubble-left markdown">生成回复中</div></div>')
     $(".content").append(chat_item);
     $(".content").scrollTop($(".content")[0].scrollHeight);
     autoScrollFlag = true;  // 新的发送请求后，开启自动滚动
