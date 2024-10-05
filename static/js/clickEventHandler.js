@@ -187,7 +187,7 @@ $("#send-btn").click(function () {
     let request_data = {
         "messages": message_contexts,
         "max_tokens": config.model_config.max_tokens || 2000,
-        "model": config.model_config.model || "gpt-3.5-turbo",
+        "model": config.model_config.model || "gpt-4-g-dJgHhfRqQ",
         "temperature": config.model_config.temperature || 0.9,
         "stream": true,
         "continues_chat": true,
