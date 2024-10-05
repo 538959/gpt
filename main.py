@@ -94,7 +94,7 @@ def get_response_from_ChatGPT_API(message_context, apikey,
         "presence_penalty": presence_penalty,
         "max_tokens": max_tokens
     }
-    url = "https://api.openai.com/v1/chat/completions"
+    url = "https://api.gptgod.online/v1/chat/completions"
 
     try:
         response = requests.post(url, headers=header, data=json.dumps(data))
@@ -197,7 +197,7 @@ def get_response_stream_generate_from_ChatGPT_API(message_context, apikey, messa
         "stream": True
     }
     logger.info("开始流式请求")
-    url = "https://api.openai.com/v1/chat/completions"
+    url = "https://api.gptgod.online/v1/chat/completions"
     # 请求接收流式数据 动态print
     try:
         response = requests.request("POST", url, headers=header, json=data, stream=True)
