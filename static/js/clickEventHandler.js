@@ -65,7 +65,7 @@ $(".chat-list").on('click', '.chat', function () {
                 selectedChatId = id;
                 $(click).addClass("selected");
                 $('.content').empty();
-                // if ($("#"+selectedChatId).data('name')!=='默认对话'){
+                // if ($("#"+selectedChatId).data('name')!=='用药建议-默认聊天框'){
                 //     $("#edit-chat-btn").html("删除对话");
                 // } else {
                 //     $("#edit-chat-btn").html("删除聊天记录");
@@ -309,12 +309,12 @@ $('#edit-chat-btn').click(function () {
 
 $('#del-chat-btn').click(function () {
     // 弹窗提醒是否确认删除
-    if (confirm("确认删除所有聊天记录吗？非默认对话时将会直接删除该对话")) {
+    if (confirm("确认删除所有聊天记录吗？非用药建议-默认聊天框时将会直接删除该对话")) {
         $.get("/deleteHistory", function (data) {
             console.log(data);
         });
         let chat_info = getSelectedChatInfo();
-        if (chat_info.name === "默认对话") {
+        if (chat_info.name === "用药建议-默认聊天框") {
             messages_of_chats[selectedChatId] = []
         } else {
             delete messages_of_chats[selectedChatId];

@@ -28,7 +28,7 @@ function getSelectedId() {
 function generateChatInfo(id) {
     return {
         "id": id,
-        "name": "默认对话",
+        "name": "用药建议-默认聊天框",
         "assistant_prompt": "",
         "selected": true,
         "mode": "continuous",
@@ -98,7 +98,7 @@ function loadChats() {
                 $(".chat-list").append(html);
                 // 将选中的selectedChat添加selected属性
                 $("#" + selectedChatId).addClass("selected");
-                // if ($("#"+selectedChatId).data('name')!=='默认对话'){
+                // if ($("#"+selectedChatId).data('name')!=='用药建议-默认聊天框'){
                 //     $("#edit-chat-btn").html("删除对话");
                 // } else {
                 //     $("#edit-chat-btn").html("删除聊天记录");
