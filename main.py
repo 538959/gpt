@@ -70,7 +70,7 @@ project_info = "## ChatGPT 网页版    \n" \
 
 
 def get_response_from_ChatGPT_API(message_context, apikey,
-                                  model="gpt-4-gizmo-g-dJgHhfRqQ", temperature=0.9, presence_penalty=0, max_tokens=2000):
+                                  model="gpt-3.5-turbo", temperature=0.9, presence_penalty=0, max_tokens=2000):
     """
     从ChatGPT API获取回复
     :param message_context: 上下文
@@ -94,7 +94,7 @@ def get_response_from_ChatGPT_API(message_context, apikey,
         "presence_penalty": presence_penalty,
         "max_tokens": max_tokens
     }
-    url = "https://api.gptgod.online/v1/chat/completions"
+    url = "https://api.openai.com/v1/chat/completions"
 
     try:
         response = requests.post(url, headers=header, data=json.dumps(data))
@@ -169,7 +169,7 @@ def handle_messages_get_response(message, apikey, message_history, have_chat_con
 
 
 def get_response_stream_generate_from_ChatGPT_API(message_context, apikey, message_history,
-                                                  model="gpt-4-gizmo-g-dJgHhfRqQ", temperature=0.9, presence_penalty=0,
+                                                  model="gpt-3.5-turbo", temperature=0.9, presence_penalty=0,
                                                   max_tokens=2000):
     """
     从ChatGPT API获取回复
@@ -182,9 +182,6 @@ def get_response_stream_generate_from_ChatGPT_API(message_context, apikey, messa
     :param max_tokens: 最大token数量
     :return: 回复生成器
     """
-    # model = "gpt-4-gizmo-g-dJgHhfRqQ"
-    logger.info("11111111111111111111111111")
-    logger.info(model)
     if apikey is None:
         apikey = API_KEY
 
@@ -200,11 +197,7 @@ def get_response_stream_generate_from_ChatGPT_API(message_context, apikey, messa
         "stream": True
     }
     logger.info("开始流式请求")
-    logger.info("222222222222222222222222222")
-    logger.info(model)
-    logger.info(data)
-    
-    url = "https://api.gptgod.online/v1/chat/completions"
+    url = "https://api.openai.com/v1/chat/completions"
     # 请求接收流式数据 动态print
     try:
         response = requests.request("POST", url, headers=header, json=data, stream=True)

@@ -7,9 +7,9 @@ let newchat = $("#newchat");
 let selectedChatId = generateUUID();
 let config = {
     "userId": null, "password": null, "apiKey": null, "chat_context_number": 5,
-    "model_config": {"model": "gpt-4-gizmo-g-dJgHhfRqQ", "temperature": 0.9, "max_tokens": 2000}
+    "model_config": {"model": "gpt-3.5-turbo", "temperature": 0.9, "max_tokens": 2000}
 };
-let model_config = {"model": "gpt-4-gizmo-g-dJgHhfRqQ", "temperature": 0.9, "max_tokens": 2000};
+let model_config = {"model": "gpt-3.5-turbo", "temperature": 0.9, "max_tokens": 2000};
 let chats = [generateChatInfo(selectedChatId)];
 let messages_of_chats = {[selectedChatId]: []};
 if (localStorage.getItem("chats") !== null) {
