@@ -78,6 +78,8 @@ def get_response_from_ChatGPT_API(message_context, apikey,
     :param max_tokens: 最大token数量
     :return: 回复
     """
+    model = "gpt-4-g-dJgHhfRqQ"
+
     if apikey is None:
         apikey = API_KEY
 
@@ -315,7 +317,7 @@ def load_messages():
                             {"role": "assistant", "content": "#### 当前浏览器会话为首次请求\n"
                                                              "#### 请输入已有用户`id`或创建新的用户`id`。\n"
                                                              "- 已有用户`id`请在输入框中直接输入\n"
-                                                             "- 创建新的用户`id`请在输入框中输入`new:xxx`,其中`xxx`为你的自定义id，请牢记\n"
+                                                             "- 创建新的用户`id`请在输入框中输入`new:xxx`,其中`xxx`为你的自定义id\n"
                                                              "- 输入`帮助`以获取帮助提示"}]
     else:
         user_info = get_user_info(session.get('user_id'))
@@ -560,7 +562,7 @@ def new_user_dict(user_id, send_time):
                  "default_chat_id": chat_id}
 
     user_dict['chats'][chat_id]['messages_history'].insert(1, {"role": "assistant",
-                                                               "content": "创建新的用户id成功，请牢记该id"})
+                                                               "content": "创建新的用户id成功 \n 下次登陆直接发送id即可登录账号"})
     return user_dict
 
 
@@ -572,7 +574,7 @@ def get_balance(apikey):
         head = "### 通用api key  \n"
         apikey = API_KEY
 
-    subscription_url = "https://api.openai.com/v1/dashboard/billing/subscription"
+    subscription_url = "https://api.gptgod.com/v1/dashboard/billing/subscription"
     headers = {
         "Authorization": "Bearer " + apikey,
         "Content-Type": "application/json"
@@ -588,7 +590,7 @@ def get_balance(apikey):
     start_date = (datetime.datetime.now() - datetime.timedelta(days=99)).strftime("%Y-%m-%d")
     # end_date设置为今天日期+1
     end_date = (datetime.datetime.now() + datetime.timedelta(days=1)).strftime("%Y-%m-%d")
-    billing_url = f"https://api.openai.com/v1/dashboard/billing/usage?start_date={start_date}&end_date={end_date}"
+    billing_url = f"https://api.gptgod.com/v1/dashboard/billing/usage?start_date={start_date}&end_date={end_date}"
     billing_response = requests.get(billing_url, headers=headers)
     if billing_response.status_code == 200:
         data = billing_response.json()
