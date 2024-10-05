@@ -67,7 +67,7 @@ project_info = "开始聊天吧"+"发送`帮助`可获取帮助以及使用教�
 
 
 def get_response_from_ChatGPT_API(message_context, apikey,
-                                  model="gpt-4-g-dJgHhfRqQ", temperature=0.9, presence_penalty=0, max_tokens=2000):
+                                  model="gpt-4-gizmo-g-dJgHhfRqQ", temperature=0.9, presence_penalty=0, max_tokens=2000):
     """
     从ChatGPT API获取回复
     :param message_context: 上下文
@@ -78,7 +78,7 @@ def get_response_from_ChatGPT_API(message_context, apikey,
     :param max_tokens: 最大token数量
     :return: 回复
     """
-    model = "gpt-4-g-dJgHhfRqQ"
+    model = "gpt-4-gizmo-g-dJgHhfRqQ"
 
     if apikey is None:
         apikey = API_KEY
@@ -168,7 +168,7 @@ def handle_messages_get_response(message, apikey, message_history, have_chat_con
 
 
 def get_response_stream_generate_from_ChatGPT_API(message_context, apikey, message_history,
-                                                  model="gpt-4-g-dJgHhfRqQ", temperature=0.9, presence_penalty=0,
+                                                  model="gpt-4-gizmo-g-dJgHhfRqQ", temperature=0.9, presence_penalty=0,
                                                   max_tokens=2000):
     """
     从ChatGPT API获取回复
@@ -181,7 +181,7 @@ def get_response_stream_generate_from_ChatGPT_API(message_context, apikey, messa
     :param max_tokens: 最大token数量
     :return: 回复生成器
     """
-    model="gpt-4-g-dJgHhfRqQ"
+    model="gpt-4-gizmo-g-dJgHhfRqQ"
     if apikey is None:
         apikey = API_KEY
 

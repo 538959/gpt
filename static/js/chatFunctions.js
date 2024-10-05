@@ -306,7 +306,7 @@ function getSummarize() {
     let request_data = {
         "messages": message_contexts,
         "max_tokens": 2000,
-        "model": "gpt-4-g-dJgHhfRqQ",
+        "model": "gpt-4-gizmo-g-dJgHhfRqQ",
         "temperature": 0.9,
         "stream": true,
         "continues_chat": true,
