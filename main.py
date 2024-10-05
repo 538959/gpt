@@ -63,10 +63,7 @@ STREAM_FLAG = True  # 是否开启流式推送
 USER_DICT_FILE = "all_user_dict_v3.pkl"  # 用户信息存储文件（包含版本）
 lock = threading.Lock()  # 用于线程锁
 
-project_info = "## ChatGPT 网页版    \n" \
-               " Code From  " \
-               "[ChatGPT-Web](https://github.com/LiangYang666/ChatGPT-Web)  \n" \
-               "发送`帮助`可获取帮助  \n"
+project_info = "开始聊天吧"+"发送`帮助`可获取帮助以及使用教程"
 
 
 def get_response_from_ChatGPT_API(message_context, apikey,
@@ -646,9 +643,8 @@ def return_message():
                "1. 输入`new:xxx`创建新的用户id\n " \
                "2. 输入`id:your_id`切换到已有用户id，新会话时无需加`id:`进入已有用户\n" \
                "3. 输入`rename_id:xxx`可将当前用户id更改\n" \
-               "4. 输入`查余额`可获得余额信息及最近几天使用量\n" \
-               "5. 相关设置也可以在设置面板中进行设置\n" \
-               "6. 输入`帮助`查看帮助信息"
+               "4. 相关设置也可以在设置面板中进行设置\n" \
+               "5. 输入`帮助`查看帮助信息"
     if session.get('user_id') is None:  # 如果当前session未绑定用户
         logger.warning("当前会话为首次请求，用户输入:\t"+send_message)
         if send_message.startswith("new:"):
