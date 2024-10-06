@@ -46,7 +46,7 @@ function generateChatInfo(id) {
 function renderChatHeadInfo() {
     if (chats.length === 0) {   // 未登陆或授权
         $(".head-chat-name").text("未登录");
-        $(".head-chat-info").text("当前浏览器未绑定用户或访问密码设置错误");
+        $(".head-chat-info").text("当前浏览器未绑定用户");
     } else {
         $(".head-chat-name").text(getSelectedChatInfo().name);
         // 判断 messages_of_chats 中是否存在selectedChatId
@@ -306,7 +306,7 @@ function getSummarize() {
     let request_data = {
         "messages": message_contexts,
         "max_tokens": 2000,
-        "model": "gpt-4-gizmo-g-dJgHhfRqQ",
+        "model": "gpt-4-gizmo-g-MlGLb5SRY",
         "temperature": 0.9,
         "stream": true,
         "continues_chat": true,

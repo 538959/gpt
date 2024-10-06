@@ -63,11 +63,11 @@ STREAM_FLAG = True  # 是否开启流式推送
 USER_DICT_FILE = "all_user_dict_v3.pkl"  # 用户信息存储文件（包含版本）
 lock = threading.Lock()  # 用于线程锁
 
-project_info = "开始聊天吧"+"发送`帮助`可获取帮助以及使用教程"
+project_info = "发送`帮助`可获取额外使用教程"
 
 
 def get_response_from_ChatGPT_API(message_context, apikey,
-                                  model="gpt-4-gizmo-g-dJgHhfRqQ", temperature=0.9, presence_penalty=0, max_tokens=2000):
+                                  model="gpt-4-gizmo-g-MlGLb5SRY", temperature=0.9, presence_penalty=0, max_tokens=2000):
     """
     从ChatGPT API获取回复
     :param message_context: 上下文
@@ -78,7 +78,7 @@ def get_response_from_ChatGPT_API(message_context, apikey,
     :param max_tokens: 最大token数量
     :return: 回复
     """
-    model = "gpt-4-gizmo-g-dJgHhfRqQ"
+    model = "gpt-4-gizmo-g-MlGLb5SRY"
 
     if apikey is None:
         apikey = API_KEY
@@ -168,7 +168,7 @@ def handle_messages_get_response(message, apikey, message_history, have_chat_con
 
 
 def get_response_stream_generate_from_ChatGPT_API(message_context, apikey, message_history,
-                                                  model="gpt-4-gizmo-g-dJgHhfRqQ", temperature=0.9, presence_penalty=0,
+                                                  model="gpt-4-gizmo-g-MlGLb5SRY", temperature=0.9, presence_penalty=0,
                                                   max_tokens=2000):
     """
     从ChatGPT API获取回复
@@ -181,7 +181,7 @@ def get_response_stream_generate_from_ChatGPT_API(message_context, apikey, messa
     :param max_tokens: 最大token数量
     :return: 回复生成器
     """
-    model="gpt-4-gizmo-g-dJgHhfRqQ"
+    model="gpt-4-gizmo-g-MlGLb5SRY"
     if apikey is None:
         apikey = API_KEY
 
@@ -491,7 +491,7 @@ def auth(request_head, session):
     else:
         if session.get('user_id') is not None:
             del session['user_id']
-        return False, "用户不存在，请在设置中填写正确的用户id，或发送new:xxx创建新的用户，其中xxx为你的自定义id"
+        return False, "当前用户不存在，请在设置中填写正确的用户id\n或<a>点击创建新的用户</a>"
 
 
 @app.route('/loadChats', methods=['GET', 'POST'])
@@ -546,13 +546,13 @@ def load_chats():
 
 
 def new_chat_dict(user_id, name, send_time):
-    return {"chat_with_history": False,
+    return {"chat_with_history": True,
             "have_chat_context": 0,  # 从每次重置聊天模式后开始重置一次之后累计
             "name": name,
             "messages_history": [{"role": "assistant", "content": project_info},
-                                 {"role": "web-system", "content": f"当前对话的用户id为{user_id}"},
+                                 {"role": "web-system", "content": f"当前对话的用户id为：{user_id}"},
                                  {"role": "web-system", "content": send_time},
-                                 {"role": "web-system", "content": f"你已添加了{name}，现在可以开始聊天了。"},
+                                 {"role": "web-system", "content": f"你已添加了`{name}`，现在可以开始聊天了。"},
                                  ]}
 
 
@@ -562,8 +562,10 @@ def new_user_dict(user_id, send_time):
                  "selected_chat_id": chat_id,
                  "default_chat_id": chat_id}
 
+    # user_dict['chats'][chat_id]['messages_history'].insert(1, {"role": "assistant",
+    #                                                            "content": f"创建新的用户id成功 \n 您的id为`{user_id}`"})
     user_dict['chats'][chat_id]['messages_history'].insert(1, {"role": "assistant",
-                                                               "content": "创建新的用户id成功 \n 下次登陆直接发送id即可登录账号"})
+                                                               "content": f"`{user_id}`您好！我是医疗助手小智，很高兴为您提供个性化的用药建议。请告诉我您的健康状况和用药需求，我将为您提供最合适的药物方案。所有建议仅供参考，请务必与医生确认。"})
     return user_dict
 
 
