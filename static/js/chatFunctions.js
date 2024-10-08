@@ -44,18 +44,50 @@ function generateChatInfo(id) {
  * 渲染当前对话框的信息，显示对话名称和聊天记录数量
  */
 function renderChatHeadInfo() {
-    if (chats.length === 0) {   // 未登陆或授权
+    if (chats.length === 0) {   // 未登录或授权
         $(".head-chat-name").text("未登录");
-        $(".head-chat-info").text("当前浏览器未绑定用户");
+        $(".head-chat-info").text("请发送 帮助 以获取注册用户教程");
+        
+        // 检查是否已有自定义气泡，避免重复插入
+        if ($(".content .custom-message").length === 0) {
+            let customText = "#### 请输入已有用户`id`或创建新的用户`id`。\n"+
+                            "- 已有用户: 请在输入框中直接发送您的`id`\n"+
+                            "- 创建用户：样例如下";
+            let customHtml = '<div class="item item-left custom-message">' +
+                             '<div class="avatar"><img src="./static/chatgpt.png" /></div>' +
+                             '<div class="bubble bubble-left markdown">' + marked.marked(customText) + '</div></div>';
+            $(".content").append(customHtml);
+            customText = "创建用户样例如下："
+            customHtml = '<div class="item item-left custom-message">' +
+                             '<div class="avatar"><img src="./static/chatgpt.png" /></div>' +
+                             '<div class="bubble bubble-left markdown">' + marked.marked(customText) + '</div></div>';
+            $(".content").append(customHtml);
+            customText = "new:xxx"
+            customHtml = '<div class="item item-left custom-message">' +
+                             '<div class="avatar"><img src="./static/chatgpt.png" /></div>' +
+                             '<div class="bubble bubble-left markdown">' + marked.marked(customText) + '</div></div>';
+            $(".content").append(customHtml);
+            customText = "其中`xxx`可以修改为您自定义的用户名称"
+            customHtml = '<div class="item item-left custom-message">' +
+                             '<div class="avatar"><img src="./static/chatgpt.png" /></div>' +
+                             '<div class="bubble bubble-left markdown">' + marked.marked(customText) + '</div></div>';
+            $(".content").append(customHtml);
+            $("#textarea").val("new:xxx");
+        }
+        
+        // 自动滚动到最新消息
+        $(".content").scrollTop($(".content")[0].scrollHeight);
     } else {
         $(".head-chat-name").text(getSelectedChatInfo().name);
-        // 判断 messages_of_chats 中是否存在selectedChatId
+        
         if (messages_of_chats[selectedChatId] === undefined) {
             messages_of_chats[selectedChatId] = [];
         }
+        
         $(".head-chat-info").text("共有" + messages_of_chats[selectedChatId].length + "条消息");
     }
 }
+
 
 
 /**

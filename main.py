@@ -318,7 +318,7 @@ def load_messages():
                             {"role": "assistant", "content": "#### 当前浏览器会话为首次请求\n"
                                                              "#### 请输入已有用户`id`或创建新的用户`id`。\n"
                                                              "- 已有用户`id`请在输入框中直接输入\n"
-                                                             "- 创建新的用户`id`请在输入框中输入`new:xxx`,其中`xxx`为你的自定义id\n"
+                                                             "- 创建新的用户`id`请在输入框中输入`new:xxx`,其中`xxx`为你的自定义id名称\n"
                                                              "- 输入`帮助`以获取帮助提示"}]
     else:
         user_info = get_user_info(session.get('user_id'))
@@ -491,7 +491,7 @@ def auth(request_head, session):
     else:
         if session.get('user_id') is not None:
             del session['user_id']
-        return False, '当前用户不存在，请在设置中填写正确的用户id\n，发送`帮助`可以获取使用教程'
+        return False, '当前用户不存在，发送`帮助`可以获取创建用户教程'
 
 
 @app.route('/loadChats', methods=['GET', 'POST'])
@@ -646,11 +646,11 @@ def return_message():
     url_redirect = {"url_redirect": "/", "user_id": None}
     if send_message == "帮助":
         return "### 帮助\n" \
-               "1. 输入`new:xxx`创建新的用户id\n " \
-               "2. 输入`id:your_id`切换到已有用户id，新会话时无需加`id:`进入已有用户\n" \
-               "3. 输入`rename_id:xxx`可将当前用户id更改\n" \
-               "4. 相关设置也可以在设置面板中进行设置\n" \
-               "5. 输入`帮助`查看帮助信息"
+               "1. 创建用户：输入`new:xxx`创建新的用户id，用户id可以自定义\n " \
+               "2. 切换用户：输入`id:your_id`切换到已有用户id，新会话时无需加`id:`进入已有用户\n" \
+               "3. 用户重命名：输入`rename_id:xxx`可将当前用户id更改\n" \
+               "4. 设置面板：相关设置也可以在设置面板中进行设置\n" \
+               "5. 帮助信息：输入`帮助`查看帮助信息"
     if session.get('user_id') is None:  # 如果当前session未绑定用户
         logger.warning("当前会话为首次请求，用户输入:\t"+send_message)
         if (send_message.startswith("new:")):
