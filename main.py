@@ -63,7 +63,7 @@ STREAM_FLAG = True  # 是否开启流式推送
 USER_DICT_FILE = "all_user_dict_v3.pkl"  # 用户信息存储文件（包含版本）
 lock = threading.Lock()  # 用于线程锁
 
-project_info = "发送`帮助`可获取额外使用教程"
+project_info = "发送`帮助`可获取使用教程"
 
 
 def get_response_from_ChatGPT_API(message_context, apikey,
@@ -491,7 +491,7 @@ def auth(request_head, session):
     else:
         if session.get('user_id') is not None:
             del session['user_id']
-        return False, "当前用户不存在，请在设置中填写正确的用户id\n或<a>点击创建新的用户</a>"
+        return False, '当前用户不存在，请在设置中填写正确的用户id\n，发送`帮助`可以获取使用教程'
 
 
 @app.route('/loadChats', methods=['GET', 'POST'])
@@ -640,6 +640,7 @@ def return_message():
     save_message = request_data.get("save_message")
 
     send_message = messages[-1].get("content")
+    send_message = send_message.replace("：", ":")
     send_time = messages[-1].get("send_time")
     display_time = bool(messages[-1].get("display_time"))
     url_redirect = {"url_redirect": "/", "user_id": None}
@@ -652,7 +653,8 @@ def return_message():
                "5. 输入`帮助`查看帮助信息"
     if session.get('user_id') is None:  # 如果当前session未绑定用户
         logger.warning("当前会话为首次请求，用户输入:\t"+send_message)
-        if send_message.startswith("new:"):
+        if (send_message.startswith("new:")):
+            # send_message = send_message.replace("new：", "new:") 
             user_id = send_message.split(":")[1]
             url_redirect["user_id"] = user_id
             if user_id in all_user_dict:
@@ -671,7 +673,7 @@ def return_message():
             user_info = get_user_info(user_id)
             if user_info is None:
                 logger.warning(f"用户输入的id{user_id}不存在")
-                return "用户id不存在，请重新输入或创建新的用户id"
+                return "用户id不存在，请重新输入或创建新的用户id，发送`帮助`可以获取使用教程"
             else:
                 session['user_id'] = user_id
                 logger.warning(f"切换到已有用户id:\t{user_id}")
@@ -684,14 +686,15 @@ def return_message():
             user_info = get_user_info(user_id)
             if user_info is None:
                 logger.warning(f"用户尝试切换的的id{user_id}不存在")
-                return "用户id不存在，请重新输入或创建新的用户id"
+                return "用户id不存在，请重新输入或创建新的用户id，发送`帮助`可以获取使用教程"
             else:
                 session['user_id'] = user_id
                 url_redirect["user_id"] = user_id
                 logger.warning(f"切换到已有用户id:\t{user_id}")
                 # 重定向到index
                 return url_redirect
-        elif send_message.startswith("new:"):
+        elif (send_message.startswith("new:")):
+            # send_message = send_message.replace("new：", "new:") 
             user_id = send_message.split(":")[1]
             if user_id in all_user_dict:
                 return "用户id已存在，请重新输入或切换到已有用户id"

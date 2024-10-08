@@ -14,9 +14,10 @@ body{
     border: #aaaaaa;
     align-items: center;
     justify-content: center;
+    background-image: url(/static/testimonial-bg1.jpg);
 }
 .all-container {
-    height: 88vh;
+    height: 90vh;
     width: 100vw;
     min-height: 480px;
     display: flex;
@@ -27,8 +28,8 @@ body{
 }
 .left-container{
     height: inherit;
-    width: 160px;
-    min-width: 100px;
+    width: 10vw;
+    /* min-width: 100px; */
     max-width: 200px;
     border-radius: 4px;
     border: 0.5px solid #D0D0D0;
@@ -63,7 +64,7 @@ body{
 }
 .right-container{
     height: inherit;
-    width: 760px;
+    width: 80vw;
     min-width: 220px;
     border-radius: 4px;
     border: 0.5px solid #cccccc;
