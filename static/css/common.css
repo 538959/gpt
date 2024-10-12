@@ -239,13 +239,17 @@ button{
 }
 /* 代码复制按钮格式 */
 .markdown pre .code-copy-btn {
+    /* 禁止用户选择文本 */
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     -khtml-user-select: none;
     user-select: none;
+    /* 绝对定位 */
     position: absolute;
+    /* 右边距 */
     right: 12px;
+    /* 字体大小 */
     font-size: 12px;
     line-height: 1;
     cursor: pointer;
@@ -273,7 +277,7 @@ button{
     width: 60px;
     height: 25px;
     padding: 2px;
-    font-size: 6px;
+    font-size: 12px;
     border: 1px solid #A0A0A0;
     border-radius: 4px;
     outline: none;

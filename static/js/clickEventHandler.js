@@ -39,8 +39,11 @@ $("#newchat").click(function () {
                 renderChatHeadInfo();
                 editCurrentChat();
             }
+             // 刷新页面
+            location.reload();
         }
     })
+
 })
 
 
